@@ -11,8 +11,8 @@ bot.start((ctx)=>{
     setTimeout(()=>{
         ctx.replyWithHTML(`Assalomu alaykum, <b>${ctx.message.chat.first_name}</b>! Sizga qanday yordam berishim mumkin`, {
             reply_markup: {
-              keyboard: [
-                [text:'Join in our Channel', {url: 'https://t.me/edumo_uz'}]
+              inline_keyboard: [
+                [{text:'Join in our Channel', url: 'https://t.me/edumo_uz'}]
               ]
             }
           });
