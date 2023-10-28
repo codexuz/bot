@@ -23,7 +23,6 @@ bot.start((ctx)=>{
 bot.on('new_chat_members', async (ctx) => {
   // Delete the "user joined" message
   await ctx.deleteMessage(ctx.message.message_id);
-      ctx.reply(`${ctx.message.new_chat_members[0].first_name}, guruhga xush kelibsiz!`);
 });
 
 bot.on('left_chat_member', async (ctx) => {
