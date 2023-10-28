@@ -1,0 +1,21 @@
+{
+  "name": "imzo_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "nodemon bot.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "assemblyai": "^3.0.0",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.0.1",
+    "telegra.ph": "^1.0.1",
+    "telegraf-session-local": "^2.1.1",
+    "telegraf-wit": "^2.1.0"
+  }
+}
