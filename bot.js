@@ -66,8 +66,6 @@ bot.on('left_chat_member', async (ctx) => {
 });
 
 
-
-// Middleware to check for links and mentions
 bot.use(async (ctx, next) => {
   const message = ctx.message;
   if (message) {
@@ -76,6 +74,7 @@ bot.use(async (ctx, next) => {
 
     // Check if the user is an admin or the owner of the chat
     const chatMember = await ctx.getChatMember(user.id);
+
     if (chatMember.status === 'administrator' || chatMember.status === 'creator') {
       // If the user is an admin or the owner, don't delete the message
       return next();
@@ -83,21 +82,29 @@ bot.use(async (ctx, next) => {
 
     // Check for links
     if (text.match(/https?:\/\/\S+/)) {
-      // Delete the message
-      await ctx.deleteMessage();
+      try {
+        // Delete the message
+        await ctx.deleteMessage(message.message_id);
 
-      // Warn the user
-      await ctx.reply(`@${user.username}, guruhga havola ulashmang!`);
+        // Warn the user
+        await ctx.reply(`@${user.username}, please refrain from sharing links in the group!`);
+      } catch (error) {
+        console.error('Error deleting message:', error);
+      }
       return;
     }
 
     // Check for mentions
     if (text.includes('@') && !message.entities) {
-      // Delete the message
-      await ctx.deleteMessage();
+      try {
+        // Delete the message
+        await ctx.deleteMessage(message.message_id);
 
-      // Warn the user
-      await ctx.reply(`@${user.username}, guruhga havola ulashmang!`);
+        // Warn the user
+        await ctx.reply(`@${user.username}, please refrain from mentioning others in the group!`);
+      } catch (error) {
+        console.error('Error deleting message:', error);
+      }
       return;
     }
   }
@@ -105,10 +112,6 @@ bot.use(async (ctx, next) => {
   // Continue to the next middleware
   next();
 });
-
-  
-
-
 
 
 
