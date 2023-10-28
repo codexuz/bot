@@ -28,6 +28,7 @@ bot.on('new_chat_members', async (ctx) => {
 bot.on('left_chat_member', async (ctx) => {
   // Delete the "user left" message
   await ctx.deleteMessage(ctx.message.message_id);
+    ctx.replyWithHTML(`${ctx.message.from.first_name}, guruhga xush kelibsiz!`)
 });
 
 
@@ -52,7 +53,7 @@ bot.use(async (ctx, next) => {
       await ctx.deleteMessage();
 
       // Warn the user
-      await ctx.reply(`@${user.username}, please do not send links in this chat.`);
+      await ctx.reply(`@${user.username}, guruhga havola ulashmang!`);
       return;
     }
 
@@ -62,7 +63,7 @@ bot.use(async (ctx, next) => {
       await ctx.deleteMessage();
 
       // Warn the user
-      await ctx.reply(`@${user.username}, please do not mention other users in this chat.`);
+      await ctx.reply(`@${user.username}, guruhga havola ulashmang!`);
       return;
     }
   }
