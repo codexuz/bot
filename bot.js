@@ -1,8 +1,7 @@
 const {Telegraf, Markup} = require('telegraf')
 
 
-const bot = new Telegraf('6334465442:AAFrIgFR53V_Ol7AtHwtSFLxXiYjxCDlRys')
-
+const bot = new Telegraf('5808022604:AAFTIpq1w1riSXpFtLDIdzRD23dQ0O0bu64')
 
 
 
