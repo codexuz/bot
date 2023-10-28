@@ -9,7 +9,7 @@ const bot = new Telegraf('6334465442:AAELbJFzXhIE5QUV2hre1zXl1bRMX1uNa0c')
 bot.start((ctx)=>{
     ctx.replyWithChatAction('typing')
     setTimeout(()=>{
-        ctx.replyWithHTML(`Assalomu alaykum, <b>${ctx.message.chat.first_name}</b>! Sizga qanday yordam berishim mumkin`, {
+        ctx.replyWithHTML(`Assalomu alaykum, <b>${ctx.message.new_chat_members[0].first_name}</b>! Sizga qanday yordam berishim mumkin`, {
             reply_markup: {
               inline_keyboard: [
                 [{text:'Join in our Channel', url: 'https://t.me/edumo_uz'}]
