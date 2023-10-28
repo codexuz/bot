@@ -20,18 +20,6 @@ bot.start((ctx)=>{
 })
 
 
-bot.on('new_chat_members', async (ctx) => {
-  // Delete the "user joined" message
-  await ctx.deleteMessage(ctx.message.message_id);
-});
-
-bot.on('left_chat_member', async (ctx) => {
-  // Delete the "user left" message
-  await ctx.deleteMessage(ctx.message.message_id);
-});
-
-
-
 // Middleware to check for links and mentions
 bot.use(async (ctx, next) => {
   const message = ctx.message;
@@ -71,6 +59,15 @@ bot.use(async (ctx, next) => {
   next();
 });
 
+bot.on('new_chat_members', async (ctx) => {
+  // Delete the "user joined" message
+  await ctx.deleteMessage(ctx.message.message_id);
+});
+
+bot.on('left_chat_member', async (ctx) => {
+  // Delete the "user left" message
+  await ctx.deleteMessage(ctx.message.message_id);
+});
 
 
 
