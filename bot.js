@@ -34,7 +34,7 @@ bot.on('new_chat_members', async (ctx) => {
       await ctx.deleteMessage(messageInfo.message_id);
       
       // Send a welcome message to the new member
-      ctx.reply(`Welcome to the group, ${ctx.message.new_chat_members[0].first_name}!`);
+      ctx.reply(`👋 ${ctx.message.new_chat_members[0].first_name} guruhga xush kelibsiz!`);
     } else {
       console.error('Message not found.');
     }
@@ -56,7 +56,7 @@ bot.on('left_chat_member', async (ctx) => {
       await ctx.deleteMessage(messageInfo.message_id);
       
       // You can also send a goodbye message or perform other actions here
-      ctx.reply(`Goodbye, ${ctx.message.left_chat_member.first_name}!`);
+      ctx.reply(`🤚 Xayr, ${ctx.message.left_chat_member.first_name}!`);
     } else {
       console.error('Message not found.');
     }
@@ -87,7 +87,7 @@ bot.use(async (ctx, next) => {
         await ctx.deleteMessage(message.message_id);
 
         // Warn the user
-        await ctx.reply(`@${user.username}, please refrain from sharing links in the group!`);
+        await ctx.reply(`⚠️ @${user.username}, guruhda havola ulashmang!`);
       } catch (error) {
         console.error('Error deleting message:', error);
       }
