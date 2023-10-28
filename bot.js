@@ -19,31 +19,52 @@ bot.start((ctx)=>{
     },1000)    
 })
 
+
+
 // Listen for new chat members
 bot.on('new_chat_members', async (ctx) => {
   try {
-    // Delete the "user joined" message
-    await ctx.deleteMessage(ctx.message.message_id);
-    
-    // Send a welcome message to the new member
-    ctx.reply(`Welcome to the group, ${ctx.message.new_chat_members[0].first_name}!`);
+    const messageInfo = await ctx.telegram.getMessage(
+      ctx.chat.id, // The chat ID where the message is
+      ctx.message.message_id // The message ID
+    );
+
+    if (messageInfo) {
+      // Delete the "user joined" message
+      await ctx.deleteMessage(messageInfo.message_id);
+      
+      // Send a welcome message to the new member
+      ctx.reply(`Welcome to the group, ${ctx.message.new_chat_members[0].first_name}!`);
+    } else {
+      console.error('Message not found.');
+    }
   } catch (error) {
-    console.error('Error deleting message:', error);
+    console.error('Error:', error);
   }
 });
 
 // Listen for left chat members
 bot.on('left_chat_member', async (ctx) => {
   try {
-    // Delete the "user left" message
-    await ctx.deleteMessage(ctx.message.message_id);
-    
-    // You can also send a goodbye message or perform other actions here
-    ctx.reply(`Goodbye, ${ctx.message.left_chat_member.first_name}!`);
+    const messageInfo = await ctx.telegram.getMessage(
+      ctx.chat.id, // The chat ID where the message is
+      ctx.message.message_id // The message ID
+    );
+
+    if (messageInfo) {
+      // Delete the "user left" message
+      await ctx.deleteMessage(messageInfo.message_id);
+      
+      // You can also send a goodbye message or perform other actions here
+      ctx.reply(`Goodbye, ${ctx.message.left_chat_member.first_name}!`);
+    } else {
+      console.error('Message not found.');
+    }
   } catch (error) {
-    console.error('Error deleting message:', error);
+    console.error('Error:', error);
   }
 });
+
 
 
 // Middleware to check for links and mentions
