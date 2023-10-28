@@ -1,26 +1,18 @@
 const {Telegraf, Markup} = require('telegraf')
-const TelegrafWit = require('telegraf-wit')
-const { AssemblyAI } = require("assemblyai")
-const telegram = require('telegraf/telegram')
 
 
-const bot = new Telegraf('6335580760:AAFgnyFscYrwjj12ax2gIcBIwqI2jdTC4jQ')
-const wit = new TelegrafWit('R2BXYMGTD5BRLS6LUNQLDZHOXYZ5EN2E')
-const client = new AssemblyAI({
-  apiKey: '1aecfb5b28dd4a948f89ca470c69bcba'
-})
+const bot = new Telegraf('6334465442:AAH2lAaym8wKcODXPwz9_nHLxKWtOJX7pHQ')
 
-const adminId = '1483919112'; 
 
 
 
 bot.start((ctx)=>{
     ctx.replyWithChatAction('typing')
     setTimeout(()=>{
-        ctx.reply(`Здравствуйте, ${ctx.message.chat.first_name}! Я админ по продажам Имзо Навои. Меня зовут Азиза. Какие вопросы у вас есть?`, {
+        ctx.replyWithHTML(`Assalomu alaykum, <b>${ctx.message.chat.first_name}</b>! Sizga qanday yordam berishim mumkin`, {
             reply_markup: {
               keyboard: [
-                ['Kanal']
+                [text:'Join in our Channel', {url: 'https://t.me/edumo_uz'}]
               ]
             }
           });
@@ -82,111 +74,7 @@ bot.use(async (ctx, next) => {
 
 
 
-bot.on('text', async (ctx) => {
-  // Forward the message to the admin
-  //bot.telegram.forwardMessage(adminId, ctx.message.chat.id, ctx.message.message_id);
 
-    return wit.meaning(ctx.message.text)
-      .then((result) => {
-        // reply to user with wit result
-        const intent =result.intents.map((intent) => intent.name)
-        switch (intent[0]) {
-            case 'req1':
-                ctx.replyWithChatAction('typing')
-               setTimeout(()=>{
-                ctx.reply(`Понятно, какой цвет и профиль вам нужен`);
-               }, 600) 
-              break;
-            case 'req2':
-                ctx.replyWithChatAction('typing')
-                setTimeout(()=>{
-              ctx.reply('Существует 3 различных типа профилей. У нас есть профили серий 6000, серий 7000 и серий 8000.');
-                }, 600)
-              break;
-              case 'req4':
-                ctx.replyWithChatAction('typing')
-                setTimeout(()=>{
-              ctx.reply('Ладно, сейчас пришлю фотографии, показывающие различия');
-                }, 600)
-              break;
-              case 'address':
-                ctx.replyWithChatAction('typing')
-                setTimeout(()=>{
-              ctx.reply('📞 Контакт: +998977977776.\n\n📍Адрес: Garden house комплекс.\n📍Ориентир: стадион «Yoshlik».');
-                }, 600)
-              break;
-            default:
-              ctx.reply('Assalomu alaykum! Sizga qanday yordam berishim mumkin.');
-              break;
-          }
-        
-
-      })
-  })
-
-
-bot.on('voice', async (ctx)=>{
-  // Forward the message to the admin
-  //bot.telegram.forwardMessage(adminId, ctx.message.chat.id, ctx.message.message_id);
-
-    ctx.replyWithChatAction('typing')
-    setTimeout(()=>{
-    ctx.reply("⏳ Пожалуйста, подождите...")
-  },300)
-    const voiceMessage = ctx.message.voice;
-  // Get the file ID and download link
-  const fileId = voiceMessage.file_id;
-  const fileLink = await bot.telegram.getFileLink(fileId);
-
-  // Using a remote URL
-const transcript = await client.transcripts.create({
-  audio_url: fileLink,
-  language_code:'ru' ,
-  punctuate:true,
-
-})
-
-const response = await client.transcripts.get(transcript.id)
-
-return wit.meaning(response.text)
-      .then((result) => {
-        // reply to user with wit result
-        const intent =result.intents.map((intent) => intent.name)
-        switch (intent[0]) {
-            case 'req1':
-                ctx.replyWithChatAction('typing')
-               setTimeout(()=>{
-                ctx.reply(`Понятно, какой цвет и профиль вам нужен`);
-               }, 600) 
-              break;
-            case 'req2':
-                ctx.replyWithChatAction('typing')
-                setTimeout(()=>{
-              ctx.reply('Существует 3 различных типа профилей. У нас есть профили серий 6000, серий 7000 и серий 8000.');
-                }, 600)
-              break;
-              case 'req4':
-                ctx.replyWithChatAction('typing')
-                setTimeout(()=>{
-              ctx.reply('Ладно, сейчас пришлю фотографии, показывающие различия');
-                }, 600)
-              break;
-              case 'address':
-                ctx.replyWithChatAction('typing')
-                setTimeout(()=>{
-              ctx.reply('📞 Контакт: +998977977776.\n\n📍Адрес: Garden house комплекс.\n📍Ориентир: стадион «Yoshlik».');
-                }, 600)
-              break;
-            default:
-              ctx.reply('Assalomu alaykum! Sizga qanday yordam berishim mumkin.');
-              break;
-          }
-        
-
-      })
-
-
-})
 
 
 bot.launch()
