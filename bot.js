@@ -22,7 +22,7 @@ bot.on('new_chat_members', async (ctx) => {
   // Delete the "user joined" message
   await ctx.deleteMessage(ctx.message.message_id);
      // Send a welcome message to the new member
-      ctx.reply(`👋 ${ctx.message.new_chat_members[0].first_name} guruhga xush kelibsiz!`);
+      ctx.reply(`👋 ${ctx.message.new_chat_members[0].first_name} guruhga xush kelibsiz! Multilevel haqida batafsil ma'lumot va qo'llanmalar uchun quyidagi botimizga o'ting 👉 @examonlinedatabaseBot`);
 });
 
 bot.on('left_chat_member', async (ctx) => {
