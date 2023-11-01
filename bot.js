@@ -55,7 +55,7 @@ bot.use(async (ctx, next) => {
         await ctx.deleteMessage(message.message_id);
 
         // Warn the user
-        await ctx.reply(`⚠️ @${user.username}, guruhda havola ulashmang!`);
+        await ctx.reply(`⚠️ ${user.first_name}, guruhda havola ulashmang!`);
       } catch (error) {
         console.error('Error deleting message:', error);
       }
@@ -69,7 +69,7 @@ bot.use(async (ctx, next) => {
         await ctx.deleteMessage(message.message_id);
 
         // Warn the user
-        await ctx.reply(`@${user.username}, please refrain from mentioning others in the group!`);
+        await ctx.reply(`@${user.first_name}, guruhda havola ulashmang!`);
       } catch (error) {
         console.error('Error deleting message:', error);
       }
